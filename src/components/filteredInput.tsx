@@ -8,7 +8,7 @@ import {
   milesOptions,
   minSalaryOptions,
   jobTypeOptions,
-} from '../../constants/selectOptions'
+} from '../constants/selectOptions'
 
 export default function FilteredInput() {
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function FilteredInput() {
 
   return (
     <form
-      className="max-w-md mx-auto mt-8 p-6 flex flex-col"
+      className="max-w-md w-full mx-auto p-4 flex items-center justify-center gap-4"
       onSubmit={e => handleFormSubmission(e)}
     >
       <Input
@@ -56,7 +56,6 @@ export default function FilteredInput() {
       <Select
         id="distance"
         name="distance"
-        label="Distance From Location"
         placeholder="Select Distance"
         value={searchInput.distance || ''}
         options={milesOptions}
@@ -65,7 +64,6 @@ export default function FilteredInput() {
       <Select
         id="jobType"
         name="jobType"
-        label="Job Type"
         placeholder="Select Job Type"
         value={searchInput.jobType || ''}
         options={jobTypeOptions}
@@ -74,7 +72,6 @@ export default function FilteredInput() {
       <Select
         id="minimumSalary"
         name="minimumSalary"
-        label="Pay"
         placeholder="Select Pay Range"
         value={searchInput.minimumSalary || ''}
         options={minSalaryOptions}

@@ -3,7 +3,6 @@ import React, { Dispatch, SetStateAction } from 'react'
 interface SelectProps {
   id: string
   name: string
-  label: string
   placeholder: string
   value: string | number
   options: { value: string | number; label: string }[]
@@ -21,7 +20,6 @@ interface SelectProps {
 export default function Select({
   id,
   name,
-  label,
   placeholder,
   value,
   options,
@@ -37,26 +35,21 @@ export default function Select({
   }
 
   return (
-    <>
-      <label htmlFor={id} className="text-gray-800 font-semibold mb-1">
-        {label}
-      </label>
-      <select
-        id={id}
-        name={name}
-        className="rounded-2xl shadow-lg p-4 mb-4 cursor-pointer"
-        value={value}
-        onChange={handleSelectChange}
-      >
-        <option value="" hidden>
-          {placeholder}
+    <select
+      id={id}
+      name={name}
+      className="rounded-2xl shadow-lg p-4 cursor-pointer"
+      value={value}
+      onChange={handleSelectChange}
+    >
+      <option value="" hidden>
+        {placeholder}
+      </option>
+      {options.map(option => (
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
-        {options.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </>
+      ))}
+    </select>
   )
 }

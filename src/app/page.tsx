@@ -1,26 +1,61 @@
 import FilteredInput from '@/components/filteredInput'
+import { jobSearchHandler } from '@/utils/jobSearch'
+import JobCard from '@/components/jobCard'
+import type { JobCardProps, JobData } from '../../types/apiFetchingTypes'
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  [key: string]: string | string[] | undefined
+}) {
+  const SearchJobResults = await jobSearchHandler(searchParams)
+
   return (
-    <section className="flex">
-      {/* Form Section (1/4 of the screen) */}
-      <div className="w-1/4 bg-white h-screen p-6 shadow-xl shadow-inner">
-        <h2 className="text-2xl font-semibold mb-4">Search Jobs</h2>
+    <section
+      className="flex flex-col h-screen m-0"
+      style={{ maxHeight: 'calc(100vh - 68px)' }}
+    >
+      <div className="w-full border">
         <FilteredInput />
       </div>
-
-      {/* Results Section (3/4 of the screen) */}
-      <div className="w-3/4 bg-gray-100 p-6">
-        {/* Add your results UI here */}
-        <h2 className="text-2xl font-semibold mb-4">Search Results</h2>
-        {/* Example result item */}
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold">Job Title</h3>
-          <p>Company Name</p>
-          <p>Location</p>
-          {/* Add more details as needed */}
+      <div className="flex">
+        <div
+          className="w-1/4 border-r h-screen overflow-auto"
+          style={{ maxHeight: 'calc(100vh - 158px)' }}
+        >
+          {typeof SearchJobResults === 'object' &&
+            SearchJobResults !== null &&
+            'results' in SearchJobResults &&
+            'ambiguousLocations' in SearchJobResults &&
+            'totalResults' in SearchJobResults &&
+            SearchJobResults.results.map((job: JobCardProps, idx) => (
+              <div key={idx} className="w-full">
+                <JobCard
+                  jobId={job.jobId}
+                  employerId={job.employerId}
+                  employerName={job.employerName}
+                  employerProfileId={job.employerProfileId}
+                  employerProfileName={job.employerProfileName}
+                  jobTitle={job.jobTitle}
+                  locationName={job.locationName}
+                  minimumSalary={job.minimumSalary}
+                  maximumSalary={job.maximumSalary}
+                  currency={job.currency}
+                  expirationDate={job.expirationDate}
+                  date={job.date}
+                  jobDescription={job.jobDescription}
+                  applications={job.applications}
+                  jobUrl={job.jobUrl}
+                />
+              </div>
+            ))}
         </div>
-        {/* Add more result items as needed */}
+        <div
+          className="w-3/4 p-4 h-screen"
+          style={{ maxHeight: 'calc(100vh - 158px)' }}
+        >
+          3
+        </div>
       </div>
     </section>
   )

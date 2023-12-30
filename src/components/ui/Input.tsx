@@ -32,22 +32,14 @@ export default function Input({
     }))
   }
   return (
-    <>
-      <label
-        htmlFor={name}
-        className="text-gray-800 font-semibold mb-1 uppercase"
-      >
-        {name}
-      </label>
-      <input
-        type="text"
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        value={searchInput}
-        onChange={e => handleFormTextInputChange(e)}
-        className="rounded-2xl shadow-lg p-4 mb-4"
-      />
-    </>
+    <input
+      type="text"
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      value={searchInput}
+      onChange={e => handleFormTextInputChange(e)}
+      className="rounded-2xl shadow-lg p-4"
+    />
   )
 }
