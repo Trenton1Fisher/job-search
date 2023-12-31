@@ -1,3 +1,6 @@
+import { NextUIPluginConfig } from '@nextui-org/react'
+import { SetStateAction, Dispatch } from 'react'
+
 export type Nullable<T> = T | null
 
 export type JobData = {
@@ -22,7 +25,31 @@ export type JobData = {
   totalResults: Nullable<number>
 }
 
-export interface JobCardProps {
+export interface HiglightedJob {
+  employerId: Nullable<number>
+  employerName: Nullable<string>
+  jobId: Nullable<number>
+  jobTitle: Nullable<string>
+  locationName: Nullable<string>
+  minimumSalary: Nullable<number>
+  maximumSalary: Nullable<number>
+  yearlyMinimumSalary: Nullable<number>
+  yearlyMaximumSalary: Nullable<number>
+  currency: Nullable<string>
+  salaryType: Nullable<string>
+  salary: Nullable<number>
+  datePosted: Nullable<string>
+  expirationDate: Nullable<string>
+  externalUrl: Nullable<string>
+  jobUrl: Nullable<string>
+  partTime: Nullable<boolean>
+  fullTime: Nullable<boolean>
+  contractType: Nullable<string>
+  jobDescription: Nullable<string>
+  applicationCount: Nullable<number>
+}
+
+export interface JobCardType {
   jobId: Nullable<number>
   employerId: Nullable<number>
   employerName: Nullable<string>
@@ -39,21 +66,3 @@ export interface JobCardProps {
   applications: Nullable<number>
   jobUrl: Nullable<string>
 }
-
-/*    <JobCard
-                jobId={job.jobId}
-                employerId={job.employerId}
-                employerName={job.employerName}
-                employerProfileId={job.employerProfileId}
-                employerProfileName={job.employerProfileName}
-                jobTitle={job.jobTitle}
-                locationName={job.locationName}
-                minimumSalary={job.minimumSalary}
-                maximumSalary={job.maximumSalary}
-                currency={job.currency}
-                expirationDate={job.expirationDate}
-                date={job.date}
-                jobDescription={job.jobDescription}
-                applications={job.applications}
-                jobUrl={job.jobUrl}
-              />*/
