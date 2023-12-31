@@ -26,9 +26,7 @@ export default function JobCard({ job }: JobCardProps) {
           <p className="text-gray-700 mb-1">Applications: {job.applications}</p>
         </div>
         <button
-          onClick={() =>
-            router.push(`/?${newSearchParams}&jobId=${job.employerId}`)
-          }
+          onClick={() => router.push(`/?${newSearchParams}&jobId=${job.jobId}`)}
           className="text-blue-500 hover:underline"
         >
           View Details

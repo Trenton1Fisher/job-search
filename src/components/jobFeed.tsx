@@ -1,4 +1,6 @@
 import JobCard from './jobCard'
+import React from 'react'
+import DOMPurify from 'isomorphic-dompurify'
 import type {
   JobData,
   JobCardType,
@@ -14,6 +16,10 @@ export default function JobFeed({
   SearchJobResults,
   highlightedJob,
 }: JobFeedProps) {
+  const sanitizedDescription = DOMPurify.sanitize(
+    highlightedJob?.jobDescription as string
+  )
+
   return (
     <>
       <div className="flex">
@@ -39,7 +45,7 @@ export default function JobFeed({
             )}
         </div>
         <div
-          className="w-3/4 p-4 h-screen"
+          className="w-3/4 p-4 h-screen overflow-auto"
           style={{ maxHeight: 'calc(100vh - 158px)' }}
         >
           {highlightedJob ? (
@@ -50,7 +56,7 @@ export default function JobFeed({
               <p>Location: {highlightedJob.locationName}</p>
               <p>Salary: {highlightedJob.salary}</p>
               <p>Date Posted: {highlightedJob.datePosted}</p>
-              <p>Description: {highlightedJob.jobDescription}</p>
+              <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
             </div>
           ) : (
             // Content to display when the state is not updated
