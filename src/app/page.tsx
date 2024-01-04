@@ -9,7 +9,7 @@ export default async function Home({
 }) {
   const SearchJobResults = await jobSearchHandler(searchParams)
   const job = await getSingleJob(searchParams['jobId'] as string)
-  console.log(job)
+  const page =searchParams['page'] as string
 
   return (
     <section
@@ -19,7 +19,7 @@ export default async function Home({
       <div className="w-full border">
         <FilteredInput />
       </div>
-      <JobFeed SearchJobResults={SearchJobResults} highlightedJob={job} />
+      <JobFeed SearchJobResults={SearchJobResults} highlightedJob={job} page={page}/>
     </section>
   )
 }

@@ -36,7 +36,7 @@ export default function FilteredInput() {
 
   return (
     <form
-      className="max-w-md w-full mx-auto p-4 flex items-center justify-center gap-4"
+      className="w-full mx-auto p-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4"
       onSubmit={e => handleFormSubmission(e)}
     >
       <Input

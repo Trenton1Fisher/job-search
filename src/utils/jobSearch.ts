@@ -13,14 +13,25 @@ export async function jobSearchHandler(
 
   Object.entries(params).forEach(([key, value]) => {
     if (key !== undefined && value !== undefined && value !== null) {
+      if(key === 'page'){
+        return
+      }
       if (key === 'jobType') {
         url += `${String(value)}=${encodeURIComponent(String(true))}&`
-      } else {
+      }
+      else {
         url += `${key}=${encodeURIComponent(String(value))}&`
       }
     }
   })
-  url += `resultsToTake=10`
+  url += `resultsToTake=20`
+  if(params['page']){
+    const pageValue = parseInt(params['page'] as string)
+    const skip = (pageValue - 1) * 20
+    url+= `&resultsToSkip=${encodeURIComponent(String(skip))}`
+  }
+
+ console.log(url)
 
   try {
     const jobs = await fetch(url, {
@@ -34,13 +45,12 @@ export async function jobSearchHandler(
   } catch (error) {
     return 'error'
   }
-}
+  }
 
 export async function getSingleJob(id: string | undefined) {
-  if (!id) {
+  if (id === undefined) {
     return
   }
-  console.log(id)
   try {
     const job = await fetch(`https://www.reed.co.uk/api/1.0/jobs/${id}`, {
       method: 'GET',

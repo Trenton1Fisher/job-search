@@ -1,6 +1,3 @@
-import { NextUIPluginConfig } from '@nextui-org/react'
-import { SetStateAction, Dispatch } from 'react'
-
 export type Nullable<T> = T | null
 
 export type JobData = {
@@ -25,7 +22,7 @@ export type JobData = {
   totalResults: Nullable<number>
 }
 
-export interface HiglightedJob {
+export interface HighlightedJob {
   employerId: Nullable<number>
   employerName: Nullable<string>
   jobId: Nullable<number>
