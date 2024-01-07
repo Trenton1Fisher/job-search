@@ -35,54 +35,56 @@ export default function FilteredInput() {
   }
 
   return (
-    <form
-      className="w-full mx-auto p-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4"
-      onSubmit={e => handleFormSubmission(e)}
-    >
-      <Input
-        id="keywords"
-        name="keywords"
-        placeholder="Enter job title, keywords, or company name"
-        searchInput={searchInput.keywords || ''}
-        setSearchInput={setSearchInput}
-      />
-      <Input
-        id="location"
-        name="location"
-        placeholder="Enter Location"
-        searchInput={searchInput.location || ''}
-        setSearchInput={setSearchInput}
-      />
-      <Select
-        id="distance"
-        name="distance"
-        placeholder="Select Distance"
-        value={searchInput.distance || ''}
-        options={milesOptions}
-        setSearchInput={setSearchInput}
-      />
-      <Select
-        id="jobType"
-        name="jobType"
-        placeholder="Select Job Type"
-        value={searchInput.jobType || ''}
-        options={jobTypeOptions}
-        setSearchInput={setSearchInput}
-      />
-      <Select
-        id="minimumSalary"
-        name="minimumSalary"
-        placeholder="Select Pay Range"
-        value={searchInput.minimumSalary || ''}
-        options={minSalaryOptions}
-        setSearchInput={setSearchInput}
-      />
-      <button
-        type="submit"
-        className="bg-black text-white rounded-lg font-extrabold uppercase p-3 transition-transform hover:scale-105 hover:bg-gray-800 hover:text-gray-200"
+    <>
+      <form
+        className="w-full mx-auto p-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4"
+        onSubmit={e => handleFormSubmission(e)}
       >
-        Search
-      </button>
-    </form>
+        <Input
+          id="keywords"
+          name="keywords"
+          placeholder="Enter job title, keywords, or company name"
+          searchInput={searchInput.keywords || ''}
+          setSearchInput={setSearchInput}
+        />
+        <Input
+          id="location"
+          name="location"
+          placeholder="Enter Location"
+          searchInput={searchInput.location || ''}
+          setSearchInput={setSearchInput}
+        />
+        <Select
+          id="distance"
+          name="distance"
+          placeholder="Select Distance"
+          value={searchInput.distance || ''}
+          options={milesOptions}
+          setSearchInput={setSearchInput}
+        />
+        <Select
+          id="jobType"
+          name="jobType"
+          placeholder="Select Job Type"
+          value={searchInput.jobType || ''}
+          options={jobTypeOptions}
+          setSearchInput={setSearchInput}
+        />
+        <Select
+          id="minimumSalary"
+          name="minimumSalary"
+          placeholder="Select Pay Range"
+          value={searchInput.minimumSalary || ''}
+          options={minSalaryOptions}
+          setSearchInput={setSearchInput}
+        />
+        <button
+          type="submit"
+          className="bg-black text-white rounded-lg font-extrabold uppercase p-3 transition-transform hover:scale-105 hover:bg-gray-800 hover:text-gray-200"
+        >
+          Search
+        </button>
+      </form>
+    </>
   )
 }

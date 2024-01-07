@@ -32,7 +32,7 @@ export default function JobFeed({
       return
     }
     newSearchParams.delete('page')
-    newSearchParams.append('page', option.toString()) 
+    newSearchParams.append('page', option.toString())
     router.push(`?${newSearchParams}`)
   }
 
@@ -64,18 +64,23 @@ export default function JobFeed({
           <div className='flex justify-center'>
             {page !== undefined ? (
               <div>
-                <button onClick={() => handlePaginationButtonClick(firstPagOption)}>{firstPagOption}</button>
-                <button >{currentPagoption}</button>
-                <button onClick={() => handlePaginationButtonClick(secondPagOption)}>{secondPagOption}</button>
+                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
+                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(firstPagOption)}>{firstPagOption}</button>
+                <button className='bg-black text-white rounded px-2 py-1 m-1 text-sm cursor-pointer'>{currentPagoption}</button>
+                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
+                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(secondPagOption)}>{secondPagOption}</button>
               </div>
             ) : (
               <div>
-                <button >1</button>
-                <button onClick={() => handlePaginationButtonClick(2)}>2</button>
-                <button onClick={() => handlePaginationButtonClick(3)}>3</button>
+                <button className='bg-black text-white rounded px-2 py-1 m-1 text-sm cursor-pointer'>1</button>
+                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
+                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(2)}>2</button>
+                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1
+                m-1 text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(3)}>3</button>
               </div>
             )}
           </div>
+
         </div>
         <div
           className=" w-full max-md:hidden md:w-2/3 lg:w-3/4 p-4 h-screen overflow-auto flex justify-center"
