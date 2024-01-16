@@ -57,13 +57,9 @@ export default function JobCard({ job }: JobCardProps) {
         </p>
         <div className="flex justify-between items-center">
           <div>
-            {job.minimumSalary && job.maximumSalary ? (
-              <p className="text-gray-700 text-sm mb-1">
-                Salary: ${job.minimumSalary} - ${job.maximumSalary}
-              </p>
-            ) : (
-              <p className="text-sm">Pay Not Given</p>
-            )}
+            <p className="text-gray-700 text-sm mb-1">
+              Application Deadline: ${job.minimumSalary} - ${job.maximumSalary}
+            </p>
           </div>
         </div>
       </div>

@@ -10,3 +10,7 @@ body {
 .jobInfo-Container p {
   margin-top: 15px;
 }
+
+* {
+  min-width: 0;
+}

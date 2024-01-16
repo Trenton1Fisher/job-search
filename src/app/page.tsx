@@ -12,10 +12,7 @@ export default async function Home({
   const page = searchParams['page'] as string
 
   return (
-    <section
-      className="flex flex-col h-screen m-0"
-      style={{ maxHeight: 'calc(100vh - 68px)' }}
-    >
+    <section className="flex flex-col overflow-y-hidden m-0">
       <div className="w-full border">
         <FilteredInput />
       </div>

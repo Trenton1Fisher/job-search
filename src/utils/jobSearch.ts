@@ -30,8 +30,6 @@ export async function jobSearchHandler(
     url += `&resultsToSkip=${encodeURIComponent(String(skip))}`
   }
 
-  console.log(url)
-
   try {
     const jobs = await fetch(url, {
       method: 'GET',

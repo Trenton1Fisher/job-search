@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import JobCard from './jobCard'
 import React from 'react'
 import type {
@@ -8,6 +8,7 @@ import type {
 } from '../../types/apiFetchingTypes'
 import HiglightedJobComponent from './highlightedJob'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Pagination from './pagination'
 
 interface JobFeedProps {
   SearchJobResults: string | JobData | undefined
@@ -18,12 +19,12 @@ interface JobFeedProps {
 export default function JobFeed({
   SearchJobResults,
   highlightedJob,
-  page
+  page,
 }: JobFeedProps) {
   const router = useRouter()
-  const firstPagOption = page !== undefined ? (Number(page) - 1) : undefined;
-  const currentPagoption = page !== undefined ? (Number(page)) : undefined
-  const secondPagOption = page !== undefined ? (Number(page) + 1) : undefined;
+  const firstPagOption = page !== undefined ? Number(page) - 1 : undefined
+  const currentPagoption = page !== undefined ? Number(page) : undefined
+  const secondPagOption = page !== undefined ? Number(page) + 1 : undefined
   const initialSearchParams = useSearchParams()
   const newSearchParams = new URLSearchParams(initialSearchParams)
 
@@ -36,14 +37,10 @@ export default function JobFeed({
     router.push(`?${newSearchParams}`)
   }
 
-
   return (
     <>
       <div className="flex w-full">
-        <div
-          className=" w-full md:w-1/3 lg:w-1/5 border-r h-screen overflow-auto"
-          style={{ maxHeight: 'calc(100vh - 158px)' }}
-        >
+        <div className=" h-screen w-full md:w-1/3 lg:w-1/5 border-r overflow-auto">
           {typeof SearchJobResults === 'object' &&
             SearchJobResults !== null &&
             'results' in SearchJobResults &&
@@ -53,7 +50,9 @@ export default function JobFeed({
                 <h1 className="text-center font-semibold">
                   Showing {SearchJobResults.totalResults} Results
                 </h1>
-                <h1 className='text-center'>Showing {SearchJobResults.results.length}</h1>
+                <h1 className="text-center">
+                  Showing {SearchJobResults.results.length}
+                </h1>
                 {SearchJobResults.results.map((job: JobCardType, idx) => (
                   <div key={idx} className="w-full">
                     <JobCard job={job} />
@@ -61,31 +60,15 @@ export default function JobFeed({
                 ))}
               </>
             )}
-          <div className='flex justify-center'>
-            {page !== undefined ? (
-              <div>
-                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
-                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(firstPagOption)}>{firstPagOption}</button>
-                <button className='bg-black text-white rounded px-2 py-1 m-1 text-sm cursor-pointer'>{currentPagoption}</button>
-                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
-                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(secondPagOption)}>{secondPagOption}</button>
-              </div>
-            ) : (
-              <div>
-                <button className='bg-black text-white rounded px-2 py-1 m-1 text-sm cursor-pointer'>1</button>
-                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1 m-1 
-                text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(2)}>2</button>
-                <button className='bg-gray-300 text-gray-800 border border-gray-400 rounded px-2 py-1
-                m-1 text-sm cursor-pointer' onClick={() => handlePaginationButtonClick(3)}>3</button>
-              </div>
-            )}
-          </div>
-
+          <Pagination
+            currentPagOption={currentPagoption}
+            firstPagOption={firstPagOption}
+            secondPagOption={secondPagOption}
+            handlePaginationButtonClick={handlePaginationButtonClick}
+            page={page}
+          />
         </div>
-        <div
-          className=" w-full max-md:hidden md:w-2/3 lg:w-3/4 p-4 h-screen overflow-auto flex justify-center"
-          style={{ maxHeight: 'calc(100vh - 158px)' }}
-        >
+        <div className="h-screen w-full max-md:hidden md:w-2/3 lg:w-3/4 p-4 overflow-auto flex justify-center">
           {highlightedJob ? (
             <HiglightedJobComponent highlightedJob={highlightedJob} />
           ) : (
