@@ -39,6 +39,12 @@ export default function Home() {
       return
     }
     DeleteLocalStorage(id)
+    const index = savedJobs.findIndex(job => job.jobId === id)
+    if (index > -1) {
+      const newSavedJobs = [...savedJobs]
+      newSavedJobs.splice(index, 1)
+      setSavedJobs(newSavedJobs)
+    }
   }
 
   return (
