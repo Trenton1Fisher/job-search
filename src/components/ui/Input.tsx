@@ -1,21 +1,22 @@
-'use client'
+"use client";
 
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from "react";
+import { useFormStatus } from "react-dom";
 
 interface InputParams {
-  id: string
-  name: string
-  placeholder: string
-  searchInput: string
+  id: string;
+  name: string;
+  placeholder: string;
+  searchInput: string;
   setSearchInput: Dispatch<
     SetStateAction<{
-      keywords: string
-      location: string
-      distance: number
-      jobType: string
-      minimumSalary: number
+      keywords: string;
+      location: string;
+      distance: number;
+      jobType: string;
+      minimumSalary: number;
     }>
-  >
+  >;
 }
 
 export default function Input({
@@ -25,11 +26,13 @@ export default function Input({
   searchInput,
   setSearchInput,
 }: InputParams) {
+  const { pending } = useFormStatus();
+
   function handleFormTextInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchInput(prev => ({
+    setSearchInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
+    }));
   }
   return (
     <input
@@ -38,8 +41,9 @@ export default function Input({
       name={name}
       placeholder={placeholder}
       value={searchInput}
-      onChange={e => handleFormTextInputChange(e)}
-      className="rounded-2xl shadow-lg p-4"
+      onChange={(e) => handleFormTextInputChange(e)}
+      className="rounded-2xl shadow-lg p-3"
+      disabled={pending}
     />
-  )
+  );
 }
