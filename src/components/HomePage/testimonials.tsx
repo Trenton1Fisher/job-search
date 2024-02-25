@@ -25,9 +25,9 @@ export default function Testimonials() {
             <div className="space-y-2 text-center">
               <h3 className="font-bold">Sarah Johnson</h3>
               <p className="text-sm/relaxed md:text-base/relaxed xl:text-lg/relaxed dark:text-gray-400">
-                "UK Jobble made it easy for me to find job openings that matched
-                my skills. I got hired by my dream company thanks to UK Jobbles
-                advanced filtering system"
+                &quot;UK Jobble made it easy for me to find job openings that
+                matched my skills. I got hired by my dream company thanks to UK
+                Jobble&apos;s advanced filtering system&quot;
               </p>
             </div>
           </div>
@@ -42,9 +42,9 @@ export default function Testimonials() {
             <div className="space-y-2 text-center">
               <h3 className="font-bold">Mark Lee</h3>
               <p className="text-sm/relaxed md:text-base/relaxed xl:text-lg/relaxed dark:text-gray-400">
-                "UK Jobble's diverse range of job openings made it effortless
-                for me to explore opportunities. Thanks to their platform, I
-                secured my dream job with ease."
+                &quot;UK Jobble&apos;s diverse range of job openings made it
+                effortless for me to explore opportunities. Thanks to their
+                platform, I secured my dream job with ease.&quot;
               </p>
             </div>
           </div>
