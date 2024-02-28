@@ -1,42 +1,18 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import type { HighlightedJob } from '../../types/apiFetchingTypes'
-import DOMPurify from 'isomorphic-dompurify'
-import Link from 'next/link'
-import {
-  isJobInLocalStorage,
-  SaveLocalStorage,
-  DeleteLocalStorage,
-} from '@/utils/localStorage'
+import Image from "next/image";
+import type { HighlightedJob } from "../../../types/apiFetchingTypes";
+import DOMPurify from "isomorphic-dompurify";
+import Link from "next/link";
 
 export default function HiglightedJobComponent({
   highlightedJob,
 }: {
-  highlightedJob: HighlightedJob
+  highlightedJob: HighlightedJob;
 }) {
-  const [isSaved, setIsSaved] = useState(false)
   const sanitizedDescription = DOMPurify.sanitize(
     highlightedJob?.jobDescription as string
-  )
-
-  useEffect(() => {
-    const isJobSaved = isJobInLocalStorage(highlightedJob.jobId)
-    setIsSaved(isJobSaved)
-  }, [highlightedJob.jobId])
-
-  function handleSavingJob() {
-    if (!highlightedJob.jobId) {
-      return
-    }
-    if (!isSaved) {
-      SaveLocalStorage(highlightedJob.jobId)
-    } else {
-      DeleteLocalStorage(highlightedJob.jobId)
-    }
-    setIsSaved(!isSaved)
-  }
+  );
 
   return (
     <div className=" max-md:hidden flex flex-col w-full lg:w-1/2">
@@ -107,12 +83,11 @@ export default function HiglightedJobComponent({
           </Link>
         )}
         <Image
-          src={isSaved ? '/filledbook.png' : '/unfilledbook.png'}
+          src={"/unfilledbook.png"}
           height={35}
           width={35}
           alt="BookMark Job"
           className=" cursor-pointer transform transition-transform duration-300 hover:scale-110"
-          onClick={handleSavingJob}
         />
       </div>
       <div
@@ -120,5 +95,5 @@ export default function HiglightedJobComponent({
         dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
       />
     </div>
-  )
+  );
 }

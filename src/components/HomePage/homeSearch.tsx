@@ -31,6 +31,7 @@ export default function HomeSearch() {
     });
     // Remove the trailing '&' if it exists
     url = url.replace(/&$/, "");
+    console.log(url);
     router.push(url);
   }
 
