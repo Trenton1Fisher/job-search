@@ -1,6 +1,5 @@
-import { sql } from "@vercel/postgres";
+import { sql } from '@vercel/postgres'
 
-//vercel db for some reason only accepts get requests at the time of creation
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const userId = searchParams.get('user')
@@ -11,11 +10,11 @@ export async function GET(request: Request) {
   }
 
   try {
-    await sql`INSERT INTO job_accounts (Account_id, Job_id) VALUES (${userId}, ${jobId});`;
+    await sql`DELETE FROM job_accounts WHERE Account_id =${userId} AND Job_id =${jobId};`
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return new Response(JSON.stringify({ added: false }))
   }
 
-  return new Response(JSON.stringify({ added: true }));
+  return new Response(JSON.stringify({ added: true }))
 }

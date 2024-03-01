@@ -25,7 +25,7 @@ export type JobData = {
 export interface HighlightedJob {
   employerId: Nullable<number>
   employerName: Nullable<string>
-  jobId: Nullable<number>
+  jobId: number
   jobTitle: Nullable<string>
   locationName: Nullable<string>
   minimumSalary: Nullable<number>

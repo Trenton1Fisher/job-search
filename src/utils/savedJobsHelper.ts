@@ -1,13 +1,20 @@
-import { getSavedJobIdsFromLocalStorage } from "./localStorage";
-import type { HighlightedJob } from "../types/apiFetchingTypes";
-import { getSingleJob } from "./jobSearch";
+'use server'
+import { sql } from '@vercel/postgres'
+import { getSingleJob } from './jobSearch'
 
-export async function getSavedJobs(): Promise<any[] | undefined> {
-  const jobIds = getSavedJobIdsFromLocalStorage();
-  if (!jobIds) {
-    return;
+export async function getSavedJobs(user: string) {
+  if (!user) {
+    return undefined
   }
-  const fetchedJobs = jobIds.map((id) => getSingleJob(id.toString()));
-  const results = await Promise.allSettled(fetchedJobs);
-  return results;
+
+  try {
+    const { rows } =
+      await sql`SELECT Job_Id FROM job_accounts WHERE Account_Id = ${user}`
+    const jobIds = rows.map(row => row.job_id)
+    const jobPromises = jobIds.map(jobId => getSingleJob(jobId))
+    const settledJobData = await Promise.allSettled(jobPromises)
+    return settledJobData
+  } catch (error) {
+    return null
+  }
 }
