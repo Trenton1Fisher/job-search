@@ -1,6 +1,6 @@
 "use server";
 
-import type { JobData } from "../../types/apiFetchingTypes";
+import type { JobData } from "../types/apiFetchingTypes";
 
 export async function jobSearchHandler(
   params: Record<string, string | string[] | undefined>

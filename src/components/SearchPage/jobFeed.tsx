@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { JobData } from "../../../types/apiFetchingTypes";
+import { JobData } from "../../types/apiFetchingTypes";
 import Link from "next/link";
 import { DollarSignIcon, Map } from "@/components/ui/svgs";
 import { Pagination } from "@nextui-org/react";

@@ -1,97 +1,116 @@
 "use client";
 
-import Image from "next/image";
-import type { HighlightedJob } from "../../../types/apiFetchingTypes";
+import { useState } from "react";
+import type { HighlightedJob } from "../../types/apiFetchingTypes";
 import DOMPurify from "isomorphic-dompurify";
-import Link from "next/link";
+import { Claims } from "@auth0/nextjs-auth0";
+
+interface HighlightedJobProps {
+  highlightedJob: HighlightedJob;
+  user: Claims | null | undefined;
+}
 
 export default function HiglightedJobComponent({
   highlightedJob,
-}: {
-  highlightedJob: HighlightedJob;
-}) {
+  user,
+}: HighlightedJobProps) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleJobSave() {
+    const res = await fetch("/api/save");
+  }
+
   const sanitizedDescription = DOMPurify.sanitize(
     highlightedJob?.jobDescription as string
   );
 
   return (
-    <div className=" max-md:hidden flex flex-col w-full lg:w-1/2">
-      <p className="font-bold text-5xl">{highlightedJob.jobTitle}</p>
-      <p className="text-sm text-gray-5 500 mt-2">
+    <div className="job-details-container px-4 lg:px-0 lg:w-1/2 py-4 md:py-0 md:ml-0">
+      <p className="job-title font-bold text-3xl md:text-4xl lg:text-5xl mt-8">
+        {highlightedJob.jobTitle}
+      </p>
+      <p className="job-meta text-sm text-gray-500 mt-2">
         {highlightedJob.employerName} • {highlightedJob.locationName}
       </p>
-      <h2 className="font-semibold text-3xl mt-8">About The Role</h2>
-      <div className="flex flex-wrap my-4">
-        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
-          <div>
-            <p className="font-bold">Date Posted</p>
-            <p>{highlightedJob.datePosted}</p>
-          </div>
-        </div>
-        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
-          <div>
-            <p className="font-bold">Application Deadline</p>
-            {highlightedJob.expirationDate}
-          </div>
-        </div>
-        <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
-          <div>
-            <p className="font-bold">Expected Salary</p>
-            {highlightedJob.salary !== null ? (
-              <p>{highlightedJob.salary}</p>
-            ) : (
-              <p>Pay Not Provided</p>
-            )}
-          </div>
-        </div>
-        <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 mt-2">
-          <div>
-            <p className="font-bold">Job Type</p>
-            {highlightedJob.partTime ? <p>Part Time</p> : <p>Full Time</p>}
-          </div>
-        </div>
-        <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 mt-2">
-          <div>
-            <p className="font-bold">Contract Type</p>
-            <p>{highlightedJob.contractType}</p>
-          </div>
-        </div>
-        <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 mt-2">
-          <div className="">
-            <p className="font-bold">Total Applicants</p>
-            <p>{highlightedJob.applicationCount}</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center">
+      <div className="apply-links flex flex-col sm:flex-row items-start mt-4 space-y-4 sm:space-y-0 sm:space-x-4">
         {highlightedJob.jobUrl && (
-          <Link
+          <a
             href={highlightedJob.jobUrl}
-            target="__blank"
-            className="border p-2 "
+            target="_blank"
+            className="apply-link border py-2 px-4 rounded-md text-center inline-block bg-gray-200 text-black hover:bg-gray-300"
           >
             Apply Through Reed.Uk
-          </Link>
+          </a>
         )}
         {highlightedJob.externalUrl && (
-          <Link
+          <a
             href={highlightedJob.externalUrl}
-            target="__blank"
-            className="border p-2 mx-3"
+            target="_blank"
+            className="apply-link border py-2 px-4 rounded-md text-center inline-block bg-gray-200 text-black hover:bg-gray-300"
           >
             Apply Through Company
-          </Link>
+          </a>
         )}
-        <Image
-          src={"/unfilledbook.png"}
-          height={35}
-          width={35}
-          alt="BookMark Job"
-          className=" cursor-pointer transform transition-transform duration-300 hover:scale-110"
-        />
+        {user && (
+          <button
+            onClick={handleJobSave}
+            className="border py-2 px-4 rounded-md text-center inline-block bg-gray-200 text-black hover:bg-gray-300 flex items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14.828V5a2 2 0 00-2-2H7a2 2 0 00-2 2v9.828l7 4.666 7-4.666z"
+              />
+            </svg>
+            <span>Save Job</span>
+          </button>
+        )}
       </div>
+      <h2 className="section-title font-semibold text-2xl md:text-3xl mt-8">
+        About The Role
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-4">
+        <div className="info-item">
+          <p className="font-bold">Date Posted</p>
+          <p>{highlightedJob.datePosted}</p>
+        </div>
+        <div className="info-item">
+          <p className="font-bold">Application Deadline</p>
+          <p>{highlightedJob.expirationDate}</p>
+        </div>
+        <div className="info-item">
+          <p className="font-bold">Expected Salary</p>
+          {highlightedJob.salary !== null ? (
+            <p>{highlightedJob.salary}</p>
+          ) : (
+            <p>Pay Not Provided</p>
+          )}
+        </div>
+        <div className="info-item mt-2">
+          <p className="font-bold">Job Type</p>
+          <p>{highlightedJob.partTime ? "Part Time" : "Full Time"}</p>
+        </div>
+        <div className="info-item mt-2">
+          <p className="font-bold">Contract Type</p>
+          <p>{highlightedJob.contractType}</p>
+        </div>
+        <div className="info-item mt-2">
+          <p className="font-bold">Total Applicants</p>
+          <p>{highlightedJob.applicationCount}</p>
+        </div>
+      </div>
+
       <div
-        className="jobInfo-Container text-left"
+        className="jobInfo-Container text-left mt-4"
         dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
       />
     </div>

@@ -1,3 +1,6 @@
-export default function Home() {
-  return <section className="h-screen mt-16"></section>;
+import { getSession } from "@auth0/nextjs-auth0";
+
+export default async function Home() {
+  const session = await getSession();
+  return <section className="h-screen py-32"></section>;
 }

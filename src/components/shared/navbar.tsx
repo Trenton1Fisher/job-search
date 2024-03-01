@@ -1,6 +1,9 @@
+"use client";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 
 export default function Navbar() {
+  const user = useUser();
   return (
     <nav className="fixed top-0 left-0 right-0 p-4 bg-white text-gray-800 z-10 flex justify-between items-center">
       <Link className="flex items-center justify-center p-1 text-xl" href="/">
@@ -27,12 +30,29 @@ export default function Navbar() {
         >
           Search
         </Link>
-        <Link
-          className="text-sm font-medium hover:underline underline-offset-4 ml-4"
-          href="#"
-        >
-          Sign Up
-        </Link>
+        {!user.user ? (
+          <a
+            className="text-sm font-medium hover:underline underline-offset-4 ml-4"
+            href="/api/auth/login"
+          >
+            Sign Up
+          </a>
+        ) : (
+          <>
+            <Link
+              href={"/saved"}
+              className="text-sm font-medium hover:underline underline-offset-4 ml-4"
+            >
+              Saved Jobs
+            </Link>
+            <a
+              href="/api/auth/logout"
+              className="text-sm font-medium hover:underline underline-offset-4 ml-4"
+            >
+              Log Out
+            </a>
+          </>
+        )}
       </div>
     </nav>
   );
