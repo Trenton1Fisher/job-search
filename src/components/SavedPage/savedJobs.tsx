@@ -81,12 +81,12 @@ export default function SavedJobs({ jobData, user }: SavedJobsProps) {
                       {loading ? 'Deleting...' : 'Delete'}
                     </button>
                     <span className="mx-2">|</span>
-                    <button
+                    <a
                       className="text-blue-600 hover:underline"
-                      onClick={() => router.push(`/job/${jobData.jobId}`)}
+                      href={`/job/${jobData.jobId}`}
                     >
                       View Full Job Details
-                    </button>
+                    </a>
                   </div>
                 </div>
               )

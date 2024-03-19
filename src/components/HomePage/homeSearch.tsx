@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Select from "../ui/Select";
-import Input from "../ui/Input";
-import Button from "../ui/button";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Select from '../ui/Select'
+import Input from '../ui/Input'
+import Button from '../ui/button'
 import {
   milesOptions,
   jobTypeOptions,
   minSalaryOptions,
-} from "@/constants/selectOptions";
+} from '@/constants/selectOptions'
 
 export default function HomeSearch() {
-  const router = useRouter();
+  const router = useRouter()
   const [searchInput, setSearchInput] = useState({
-    keywords: "",
-    location: "",
+    keywords: '',
+    location: '',
     distance: 50,
-    jobType: "",
+    jobType: '',
     minimumSalary: 0,
-  });
+  })
 
   function handleFormSubmission() {
-    let url = "/search?";
+    let url = '/search?'
 
     Object.entries(searchInput).forEach(([key, value]) => {
-      if (key !== undefined && value !== "" && value !== 0) {
-        url += `${key}=${encodeURIComponent(String(value))}&`;
+      if (key !== undefined && value !== '' && value !== 0) {
+        url += `${key}=${encodeURIComponent(String(value))}&`
       }
-    });
+    })
     // Remove the trailing '&' if it exists
-    url = url.replace(/&$/, "");
-    console.log(url);
-    router.push(url);
+    url = url.replace(/&$/, '')
+    console.log(url)
+    router.push(url)
   }
 
   return (
@@ -60,7 +60,7 @@ export default function HomeSearch() {
                 id="keywords"
                 name="keywords"
                 placeholder="Enter job title or Keywords"
-                searchInput={searchInput.keywords || ""}
+                searchInput={searchInput.keywords || ''}
                 setSearchInput={setSearchInput}
               />
             </div>
@@ -72,7 +72,7 @@ export default function HomeSearch() {
                 id="location"
                 name="location"
                 placeholder="Enter Location"
-                searchInput={searchInput.location || ""}
+                searchInput={searchInput.location || ''}
                 setSearchInput={setSearchInput}
               />
             </div>
@@ -86,7 +86,7 @@ export default function HomeSearch() {
                 id="distance"
                 name="distance"
                 placeholder="Select Distance"
-                value={searchInput.distance || ""}
+                value={searchInput.distance || ''}
                 options={milesOptions}
                 setSearchInput={setSearchInput}
               />
@@ -99,7 +99,7 @@ export default function HomeSearch() {
                 id="jobType"
                 name="jobType"
                 placeholder="Select Job Type"
-                value={searchInput.jobType || ""}
+                value={searchInput.jobType || ''}
                 options={jobTypeOptions}
                 setSearchInput={setSearchInput}
               />
@@ -115,7 +115,7 @@ export default function HomeSearch() {
                 id="minimumSalary"
                 name="minimumSalary"
                 placeholder="Select Pay Range"
-                value={searchInput.minimumSalary || ""}
+                value={searchInput.minimumSalary || ''}
                 options={minSalaryOptions}
                 setSearchInput={setSearchInput}
               />
@@ -127,5 +127,5 @@ export default function HomeSearch() {
         </form>
       </div>
     </section>
-  );
+  )
 }

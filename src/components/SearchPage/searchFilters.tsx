@@ -1,44 +1,45 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Select from "../ui/Select";
-import Input from "../ui/Input";
-import Button from "../ui/button";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Select from '../ui/Select'
+import Input from '../ui/Input'
+import Button from '../ui/button'
 import {
   milesOptions,
   jobTypeOptions,
   minSalaryOptions,
-} from "@/constants/selectOptions";
+} from '@/constants/selectOptions'
+import MobileSearchFilters from './mobileSearchFilters'
 
 export default function SearchPageSearch() {
-  const router = useRouter();
+  const router = useRouter()
   const [searchInput, setSearchInput] = useState({
-    keywords: "",
-    location: "",
+    keywords: '',
+    location: '',
     distance: 50,
-    jobType: "",
+    jobType: '',
     minimumSalary: 0,
-  });
+  })
 
   function handleFormSubmission() {
-    let url = "/search?";
+    let url = '/search?'
 
     Object.entries(searchInput).forEach(([key, value]) => {
-      if (key !== undefined && value !== "" && value !== 0) {
-        url += `${key}=${encodeURIComponent(String(value))}&`;
+      if (key !== undefined && value !== '' && value !== 0) {
+        url += `${key}=${encodeURIComponent(String(value))}&`
       }
-    });
+    })
     // Remove the trailing '&' if it exists
-    url = url.replace(/&$/, "");
-    router.push(url);
+    url = url.replace(/&$/, '')
+    router.push(url)
   }
 
   return (
-    <section className="bg-white rounded-lg mt-10 overflow-hidden border border-gray-200">
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">Filters</h2>
-        <form className="max-w-md mx-auto" onSubmit={handleFormSubmission}>
+    <section className="custom:bg-white rounded-lg lg:mt-10 overflow-hidden">
+      <div className="p-4 max-[1027px]:hidden">
+        <h2 className="text-xl font-semibold mb-2 text-center">Filters</h2>
+        <form className="max-w-md mx-auto" action={handleFormSubmission}>
           <div className="mb-4 flex flex-col w-full mx-auto">
             <label
               htmlFor="keywords"
@@ -50,7 +51,7 @@ export default function SearchPageSearch() {
               id="keywords"
               name="keywords"
               placeholder="Enter job title or keywords"
-              searchInput={searchInput.keywords || ""}
+              searchInput={searchInput.keywords || ''}
               setSearchInput={setSearchInput}
             />
           </div>
@@ -65,7 +66,7 @@ export default function SearchPageSearch() {
               id="location"
               name="location"
               placeholder="Enter location"
-              searchInput={searchInput.location || ""}
+              searchInput={searchInput.location || ''}
               setSearchInput={setSearchInput}
             />
           </div>
@@ -80,7 +81,7 @@ export default function SearchPageSearch() {
               id="distance"
               name="distance"
               placeholder="Select distance"
-              value={searchInput.distance || ""}
+              value={searchInput.distance || ''}
               options={milesOptions}
               setSearchInput={setSearchInput}
             />
@@ -96,7 +97,7 @@ export default function SearchPageSearch() {
               id="jobType"
               name="jobType"
               placeholder="Select job type"
-              value={searchInput.jobType || ""}
+              value={searchInput.jobType || ''}
               options={jobTypeOptions}
               setSearchInput={setSearchInput}
             />
@@ -112,7 +113,7 @@ export default function SearchPageSearch() {
               id="minimumSalary"
               name="minimumSalary"
               placeholder="Select pay range"
-              value={searchInput.minimumSalary || ""}
+              value={searchInput.minimumSalary || ''}
               options={minSalaryOptions}
               setSearchInput={setSearchInput}
             />
@@ -122,6 +123,11 @@ export default function SearchPageSearch() {
           </div>
         </form>
       </div>
+      <MobileSearchFilters
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleFormSubmission={handleFormSubmission}
+      />
     </section>
-  );
+  )
 }
