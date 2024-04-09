@@ -76,7 +76,6 @@ export async function getSingleJob(
     )
 
     const jobData = await jobResponse.json()
-    // Assuming the jobData matches the structure of HighlightedJob, you can directly return it
     return jobData as HighlightedJob
   } catch (error) {
     console.error('Error fetching job data:', error)

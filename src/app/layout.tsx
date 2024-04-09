@@ -4,7 +4,6 @@ import './globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
-import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,9 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <link rel="icon" href="/app_icon.png" sizes="any" />
-      </Head>
+      </head>
       <UserProvider>
         <body className={inter.className}>
           <Navbar />
