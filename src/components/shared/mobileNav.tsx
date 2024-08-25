@@ -44,17 +44,17 @@ export default function MobileNav({ user }: MobileNavProps) {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                className="h-6 w-6 text-primary"
                 fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
               >
-                <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
               <span className="text-black font-semibold ml-2">UK Jobble</span>
             </Link>

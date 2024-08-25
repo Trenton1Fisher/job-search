@@ -1,15 +1,19 @@
-import Testimonials from "@/components/HomePage/testimonials";
-import Advantages from "@/components/HomePage/advantages";
-import HomeSearch from "@/components/HomePage/homeSearch";
+import Testimonials from '@/components/HomePage/testimonials'
+import HomeSearch from '@/components/HomePage/homeSearch'
+import HomeHeader from '@/components/HomePage/homeHeader'
+import PopularSearches from '@/components/HomePage/popularSearches'
+import BannerFeatures from '@/components/HomePage/banner'
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center min-h-[100dvh]">
-      <main className="flex-1">
+    <main className="">
+      <div className="md:h-screen">
+        <HomeHeader />
         <HomeSearch />
-        <Advantages />
-        <Testimonials />
-      </main>
-    </div>
-  );
+      </div>
+      <PopularSearches />
+      <BannerFeatures />
+      <Testimonials />
+    </main>
+  )
 }

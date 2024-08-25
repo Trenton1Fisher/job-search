@@ -1,55 +1,50 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Testimonials() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container mx-auto grid items-center gap-4 px-4 text-center md:px-6 lg:gap-10 justify-center">
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-            Success Stories
-          </h2>
-          <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            See what our users have to say about finding their dream jobs with
-            UK Jobble.
-          </p>
+    <div className="container mx-auto px-4 py-16 my-12">
+      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
+        Testimonial
+      </h2>
+      <div className="flex flex-col md:flex-row items-center max-w-4xl mx-auto">
+        <div className="md:w-1/3 mb-8 md:mb-0 relative">
+          <Image
+            src={'/mark-stock.jpg'}
+            width={250}
+            height={250}
+            alt=" User Mark Lee Image"
+            className="rounded-full aspect-square object-cover"
+          />
+          <div className="absolute -bottom-4 -right-4 bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+              />
+            </svg>
+          </div>
         </div>
-        <div className="mx-auto grid max-w-2xl items-center gap-4 sm:grid-cols-2 sm:gap-10">
-          <div className="flex flex-col items-center gap-2">
-            <Image
-              src={"/stock-woman.jpg"}
-              width={130}
-              height={130}
-              alt="User Sarah Johnson Image"
-              className="rounded-full aspect-square object-cover"
-            />
-            <div className="space-y-2 text-center">
-              <h3 className="font-bold">Sarah Johnson</h3>
-              <p className="text-sm/relaxed md:text-base/relaxed xl:text-lg/relaxed dark:text-gray-400">
-                &quot;UK Jobble made it easy for me to find job openings that
-                matched my skills. I got hired by my dream company thanks to UK
-                Jobble&apos;s advanced filtering system&quot;
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center gap-2 ">
-            <Image
-              src={"/mark-stock.jpg"}
-              width={130}
-              height={130}
-              alt=" User Mark Lee Image"
-              className="rounded-full aspect-square object-cover"
-            />
-            <div className="space-y-2 text-center">
-              <h3 className="font-bold">Mark Lee</h3>
-              <p className="text-sm/relaxed md:text-base/relaxed xl:text-lg/relaxed dark:text-gray-400">
-                &quot;UK Jobble&apos;s diverse range of job openings made it
-                effortless for me to explore opportunities. Thanks to their
-                platform, I secured my dream job with ease.&quot;
-              </p>
-            </div>
-          </div>
+        <div className="md:w-2/3 md:pl-12">
+          <blockquote className=" text-gray-700 mb-4">
+            &quot;UK Jobble made my job search incredibly straightforward and
+            rewarding. The platform&apos;s intuitive design and extensive
+            listings helped me find a position that perfectly matched my skills
+            and career aspirations. Thanks to UK Jobble, I’m now thriving in a
+            role that I’m truly passionate about. Their support and
+            user-friendly interface have been invaluable in my journey towards a
+            fulfilling career.&quot;
+          </blockquote>
+          <cite className="text-gray-600"> - Mark</cite>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  )
 }

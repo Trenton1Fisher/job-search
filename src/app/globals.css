@@ -3,14 +3,39 @@
 @tailwind utilities;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
-body {
-  background-color: #F4FFF8;
-}
-
 .jobInfo-Container p {
   margin-top: 15px;
 }
 
-* {
-  min-width: 0;
+.header-section {
+  background-image: url('/banner.png');
+  background-position: right bottom;
+}
+
+.banner-features {
+  position: relative;
+  background-image: url('/features.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    29,
+    141,
+    216,
+    0.788
+  ); /* Apply a semi-transparent blue overlay */
+  z-index: 1;
+}
+
+.banner-features > * {
+  position: relative;
+  z-index: 2; /* Ensure content is above the overlay */
 }
