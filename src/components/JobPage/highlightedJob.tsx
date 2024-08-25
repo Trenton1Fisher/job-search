@@ -5,6 +5,7 @@ import type { HighlightedJob } from '../../types/apiFetchingTypes'
 import DOMPurify from 'isomorphic-dompurify'
 import { Claims } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface HighlightedJobProps {
   highlightedJob: HighlightedJob
@@ -74,141 +75,188 @@ export default function HiglightedJobComponent({
   }
 
   return (
-    <div className="job-details-container px-4 lg:px-0 lg:w-1/2 py-4 md:py-0 md:ml-0">
-      <button className="text-xl" onClick={() => router.back()}>
-        &lt;- Return
-      </button>
-      <p className="job-title font-bold text-3xl md:text-4xl lg:text-5xl mt-8">
-        {highlightedJob.jobTitle}
-      </p>
-      <p className="job-meta text-sm text-gray-500 mt-2">
-        {highlightedJob.employerName} • {highlightedJob.locationName}
-      </p>
-      <div className="apply-links flex flex-col sm:flex-row items-start mt-4 space-y-4 sm:space-y-0 sm:space-x-4">
-        {highlightedJob.jobUrl && (
-          <a
-            href={highlightedJob.jobUrl}
-            target="_blank"
-            className="apply-link border py-2 px-4 rounded-md text-center inline-block bg-gray-200 text-black hover:bg-gray-300"
-          >
-            Apply Through Reed.Uk
-          </a>
-        )}
-        {highlightedJob.externalUrl && (
-          <a
-            href={highlightedJob.externalUrl}
-            target="_blank"
-            className="apply-link border py-2 px-4 rounded-md text-center inline-block bg-gray-200 text-black hover:bg-gray-300"
-          >
-            Apply Through Company
-          </a>
-        )}
-        {user && (
-          <button
-            onClick={() => (isSaved ? handleJobDelete() : handleJobSave())} // Disable the button only when loading is true
-            className={`border py-2 px-4 rounded-md text-center inline-block ${
-              loading
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gray-200 hover:bg-gray-300'
-            } flex items-center`}
-          >
-            {isSaved ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-1 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            ) : loading ? (
-              <svg
-                className="animate-spin h-5 w-5 mr-3"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V2.5A1.5 1.5 0 0010.5 1h-1A1.5 1.5 0 008 2.5V4a8 8 0 018 8h1.5a1.5 1.5 0 000-3h-3a1.5 1.5 0 00-1.5 1.5V14a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V9.5A3.5 3.5 0 0012.5 6h-1A3.5 3.5 0 008 9.5V11a8 8 0 01-4 6.928z"
-                ></path>
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14.828V5a2 2 0 00-2-2H7a2 2 0 00-2 2v9.828l7 4.666 7-4.666z"
-                />
-              </svg>
-            )}
-            <span>
-              {isSaved ? 'Unsave Job' : loading ? 'Saving...' : 'Save Job'}
-            </span>
-          </button>
-        )}
-      </div>
-      <h2 className="section-title font-semibold text-2xl md:text-3xl mt-8">
-        About The Role
-      </h2>
+    <div className="max-w-7xl mx-auto p-6">
+      <div className="grid lg:grid-cols-[1fr_350px] gap-6">
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg shadow-xl border p-6 relative">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-4">
+                <div>
+                  <button
+                    className="text-xl mb-4"
+                    onClick={() => router.back()}
+                  >
+                    &lt;- Return
+                  </button>
+                  {user && (
+                    <button
+                      aria-label={isSaved ? 'Unfavorite' : 'Favorite'}
+                      className={`absolute top-5 right-5 ${
+                        isSaved ? 'text-green-500' : 'text-gray-500'
+                      }`}
+                      onClick={isSaved ? handleJobDelete : handleJobSave}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill={isSaved ? 'currentColor' : 'none'}
+                        stroke={isSaved ? 'currentColor' : 'gray'}
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                  <h1 className="text-xl font-bold">
+                    {highlightedJob.jobTitle}
+                  </h1>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    {highlightedJob.locationName}
+                    <svg
+                      className="w-4 h-4 ml-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    {highlightedJob.fullTime && 'Full-time'}
+                    {highlightedJob.fullTime && highlightedJob.partTime
+                      ? ', '
+                      : ''}
+                    {highlightedJob.partTime && 'Part-time'}
+                    {highlightedJob.fullTime || highlightedJob.partTime
+                      ? highlightedJob.contractType
+                        ? ', '
+                        : ''
+                      : ''}
+                    {highlightedJob.contractType || 'No job type specified'}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="space-y-6"
+              dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+            />
+          </div>
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-4">
-        <div className="info-item">
-          <p className="font-bold">Date Posted</p>
-          <p>{highlightedJob.datePosted}</p>
-        </div>
-        <div className="info-item">
-          <p className="font-bold">Application Deadline</p>
-          <p>{highlightedJob.expirationDate}</p>
-        </div>
-        <div className="info-item">
-          <p className="font-bold">Expected Salary</p>
-          {highlightedJob.salary !== null ? (
-            <p>{highlightedJob.salary}</p>
-          ) : (
-            <p>Pay Not Provided</p>
-          )}
-        </div>
-        <div className="info-item mt-2">
-          <p className="font-bold">Job Type</p>
-          <p>{highlightedJob.partTime ? 'Part Time' : 'Full Time'}</p>
-        </div>
-        <div className="info-item mt-2">
-          <p className="font-bold">Contract Type</p>
-          <p>{highlightedJob.contractType}</p>
-        </div>
-        <div className="info-item mt-2">
-          <p className="font-bold">Total Applicants</p>
-          <p>{highlightedJob.applicationCount}</p>
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg shadow-xl border p-6">
+            <h2 className="text-lg font-semibold mb-4">Job Summary</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Published on:</span>
+                <span>{highlightedJob.datePosted}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Application Deadline:</span>
+                <span>{highlightedJob.expirationDate}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Total Applicants:</span>
+                {highlightedJob.applicationCount ? (
+                  <span>{highlightedJob.applicationCount}</span>
+                ) : (
+                  '0'
+                )}
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Salary:</span>
+                {highlightedJob.salary ? (
+                  <span>{highlightedJob.salary}</span>
+                ) : (
+                  'Salary Not Provided'
+                )}
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600">Location:</span>
+                <span>{highlightedJob.locationName}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-xl border p-6">
+            <div className="">
+              <h2 className="text-lg font-semibold mb-4">Apply</h2>
+            </div>
+            <div className="space-y-2">
+              {highlightedJob.externalUrl && (
+                <a
+                  href={highlightedJob.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-blue-500 hover:text-blue-700"
+                >
+                  <span className="mr-1">Apply Through Company Website</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="5px"
+                    width="15"
+                    height="30"
+                    viewBox="0 15 30 30"
+                  >
+                    <path d="M 25.980469 2.9902344 A 1.0001 1.0001 0 0 0 25.869141 3 L 20 3 A 1.0001 1.0001 0 1 0 20 5 L 23.585938 5 L 13.292969 15.292969 A 1.0001 1.0001 0 1 0 14.707031 16.707031 L 25 6.4140625 L 25 10 A 1.0001 1.0001 0 1 0 27 10 L 27 4.1269531 A 1.0001 1.0001 0 0 0 25.980469 2.9902344 z M 6 7 C 4.9069372 7 4 7.9069372 4 9 L 4 24 C 4 25.093063 4.9069372 26 6 26 L 21 26 C 22.093063 26 23 25.093063 23 24 L 23 14 L 23 11.421875 L 21 13.421875 L 21 16 L 21 24 L 6 24 L 6 9 L 14 9 L 16 9 L 16.578125 9 L 18.578125 7 L 16 7 L 14 7 L 6 7 z"></path>
+                  </svg>
+                </a>
+              )}
+              {highlightedJob.jobUrl && (
+                <a
+                  href={highlightedJob.jobUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-blue-500 hover:text-blue-700"
+                >
+                  <span className="mr-1">Apply Through Reed.Uk</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="5px"
+                    width="15"
+                    height="30"
+                    viewBox="0 15 30 30"
+                  >
+                    <path d="M 25.980469 2.9902344 A 1.0001 1.0001 0 0 0 25.869141 3 L 20 3 A 1.0001 1.0001 0 1 0 20 5 L 23.585938 5 L 13.292969 15.292969 A 1.0001 1.0001 0 1 0 14.707031 16.707031 L 25 6.4140625 L 25 10 A 1.0001 1.0001 0 1 0 27 10 L 27 4.1269531 A 1.0001 1.0001 0 0 0 25.980469 2.9902344 z M 6 7 C 4.9069372 7 4 7.9069372 4 9 L 4 24 C 4 25.093063 4.9069372 26 6 26 L 21 26 C 22.093063 26 23 25.093063 23 24 L 23 14 L 23 11.421875 L 21 13.421875 L 21 16 L 21 24 L 6 24 L 6 9 L 14 9 L 16 9 L 16.578125 9 L 18.578125 7 L 16 7 L 14 7 L 6 7 z"></path>
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-
-      <div
-        className="jobInfo-Container text-left mt-4"
-        dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-      />
     </div>
   )
 }

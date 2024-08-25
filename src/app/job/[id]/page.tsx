@@ -19,7 +19,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   const saved = user && job ? await getIsJobSaved(user.sub, job.jobId) : false
 
   return (
-    <section className="lg:pt-24 py-24 pb-4 flex flex-col items-center justify-center mb-2">
+    <section className="lg:pt-24 pt-24 pb-4 flex flex-col items-center justify-center mb-2">
       {job ? (
         <HiglightedJobComponent
           highlightedJob={job}
