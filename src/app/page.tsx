@@ -7,10 +7,8 @@ import BannerFeatures from '@/components/HomePage/banner'
 export default function Home() {
   return (
     <main className="">
-      <div className="md:h-screen">
-        <HomeHeader />
-        <HomeSearch />
-      </div>
+      <HomeHeader />
+      <HomeSearch />
       <PopularSearches />
       <BannerFeatures />
       <Testimonials />

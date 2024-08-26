@@ -39,15 +39,11 @@ export default function JobFeed({ jobResults, searchParams }: JobFeedProps) {
         <p>No search results found. Please try again.</p>
       ) : (
         <div className="">
-          <p className="font-bold text-2xl text-center mb-2">
-            {jobResults.totalResults} Jobs Found
-          </p>
           {jobResults.results.map(result => (
             <div
               key={result.jobId}
               className="w-full bg-white shadow-md rounded-lg border mx-auto mb-4 relative"
             >
-              {/* Position total applicants count in the top right */}
               <span className="absolute max-[540px]:hidden top-0 right-0 bg-gray-200 px-2 py-1 text-xs">
                 {result.applications} Applicants
               </span>

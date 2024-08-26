@@ -10,7 +10,6 @@ import {
   jobTypeOptions,
   minSalaryOptions,
 } from '@/constants/selectOptions'
-import MobileSearchFilters from './mobileSearchFilters'
 
 export default function SearchPageSearch() {
   const router = useRouter()
@@ -36,8 +35,8 @@ export default function SearchPageSearch() {
   }
 
   return (
-    <section className="custom:bg-white rounded-lg lg:mt-10 overflow-hidden">
-      <div className="p-4 max-[1027px]:hidden">
+    <section className="custom:bg-white mx-auto customSearchFilters:w-full w-2/3 md:shadow-xl border rounded-lg overflow-hidden">
+      <div className="p-4">
         <h2 className="text-xl font-semibold mb-2 text-center">Filters</h2>
         <form className="max-w-md mx-auto" action={handleFormSubmission}>
           <div className="mb-4 flex flex-col w-full mx-auto">
@@ -123,11 +122,6 @@ export default function SearchPageSearch() {
           </div>
         </form>
       </div>
-      <MobileSearchFilters
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        handleFormSubmission={handleFormSubmission}
-      />
     </section>
   )
 }

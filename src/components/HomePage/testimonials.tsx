@@ -10,8 +10,8 @@ export default function Testimonials() {
         <div className="md:w-1/3 mb-8 md:mb-0 relative">
           <Image
             src={'/mark-stock.jpg'}
-            width={250}
-            height={250}
+            width={200}
+            height={200}
             alt=" User Mark Lee Image"
             className="rounded-full aspect-square object-cover"
           />

@@ -18,6 +18,7 @@ const config: Config = {
       screens: {
         custom: '1028px',
         customSmall: '540px',
+        customSearchFilters: '1028px',
       },
     },
   },

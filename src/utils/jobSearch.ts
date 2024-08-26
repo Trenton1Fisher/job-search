@@ -36,10 +36,10 @@ export async function jobSearchHandler(
       }
     }
   })
-  url += `resultsToTake=12`
+  url += `resultsToTake=8`
   if (params['page']) {
     const pageValue = parseInt(params['page'] as string)
-    const skip = (pageValue - 1) * 12
+    const skip = (pageValue - 1) * 8
     url += `&resultsToSkip=${encodeURIComponent(String(skip))}`
   }
 
