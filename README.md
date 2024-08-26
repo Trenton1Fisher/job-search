@@ -60,10 +60,10 @@
 
 ## Built With
 
-* [![Next.js][Next.js]][Next-url]
-* [![Tailwind CSS][Tailwind.css]][Tailwind-url]
-* [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
-* [![Auth0][Auth0]][Auth0-url]
+- ⚡️ Next.js 14
+- 🐘 PostgreSQL
+- ✨ TypeScript
+- 💨 Auth0
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
