@@ -19,7 +19,11 @@ export default async function Home({
           className="w-full h-auto object-cover"
         />
         <h1 className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-white p-4">
-          {searchData.totalResults} Jobs Found
+          {typeof searchData === 'object' &&
+          searchData !== undefined &&
+          'totalResults' in searchData
+            ? `${searchData.totalResults} Jobs Found`
+            : 'Jobs Found'}
         </h1>
       </div>
       <div className="max-w-[1024px] mx-auto">
