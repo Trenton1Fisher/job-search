@@ -54,10 +54,6 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-### Built With
-
 ## Built With
 
 - ⚡️ Next.js 14
@@ -66,8 +62,6 @@
 - 💨 Auth0
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
