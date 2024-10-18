@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="https://github.com/user-attachments/assets/0f2cd737-de1f-44cc-809a-bc2a90bccb0d" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/0f2cd737-de1f-44cc-809a-bc2a90bccb0d" alt="Logo">
 
   </a>
 
@@ -17,8 +17,6 @@
     <a href="https://job.trentonfisher.xyz">View Demo</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -77,24 +75,44 @@ Make sure you have the following installed on your machine:
 1. **Clone the repository**  
    Open your terminal and run the following command to clone the repository:
    ```bash
-   git clone https://github.com/your-username/job-search-app.git
+   git clone https://github.com/Trenton1Fisher/job-search.git
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Enter your API keys in a `.env.local` file
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-4. Change git remote url to avoid accidental pushes to base project
+3. Obtain necessary api keys
+   - First Visit[Reed.co.uk](https://www.reed.co.uk/developers) to obtain api key to enable job searching data
+   - Go to [Vercel](https://vercel.com/) and set up a PostgreSQL database. Once the database is created, Copy all relevant credentials.
+   - Copy your API keys and credentials into the following format(It is important to keep all names the same and do not edit the port of the Auth0 base URL).
+     ```
+      AUTH0_BASE_URL=http://localhost:3000
+      AUTH0_SECRET=your_auth0_secret_key
+      SEARCH_API_KEY=your_search_api_key
+      AUTH0_ISSUER_BASE_URL=your_auth0_issuer_base_url
+      AUTH0_CLIENT_ID=your_auth0_client_id
+      AUTH0_CLIENT_SECRET=your_auth0_client_secret
+      CLIENT_ID=your_google_client_id
+      CLIENT_SECRET=your_google_client_secret
+      POSTGRES_URL_NON_POOLING=your_postgres_non_pooling_url
+      POSTGRES_URL_NO_SSL=your_postgres_no_ssl_url
+      POSTGRES_PRISMA_URL=your_postgres_prisma_url
+      POSTGRES_USER=your_postgres_user
+      POSTGRES_PASSWORD=your_postgres_password
+      POSTGRES_HOST=your_postgres_host
+      POSTGRES_DATABASE=your_postgres_database
+      POSTGRES_URL=your_postgres_url
+      ```
+5. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+6. Lastly Run the app with:
+   ```
+   npm run dev
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
