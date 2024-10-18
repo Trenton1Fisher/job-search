@@ -72,6 +72,7 @@ Make sure you have the following installed on your machine:
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 
 ### Installation
+
 1. **Clone the repository**  
    Open your terminal and run the following command to clone the repository:
    ```bash
@@ -81,8 +82,11 @@ Make sure you have the following installed on your machine:
    npm install
    ```
 3. Obtain necessary api keys
-   - First Visit[Reed.co.uk](https://www.reed.co.uk/developers) to obtain api key to enable job searching data
+   
+   - First Visit [Reed.co.uk](https://www.reed.co.uk/developers) to obtain api key to enable job searching data
+     
    - Go to [Vercel](https://vercel.com/) and set up a PostgreSQL database. Once the database is created, Copy all relevant credentials.
+   
    - Copy your API keys and credentials into the following format(It is important to keep all names the same and do not edit the port of the Auth0 base URL).
      ```
       AUTH0_BASE_URL=http://localhost:3000
@@ -102,11 +106,13 @@ Make sure you have the following installed on your machine:
       POSTGRES_DATABASE=your_postgres_database
       POSTGRES_URL=your_postgres_url
       ```
+     
 5. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+   
 6. Lastly Run the app with:
    ```
    npm run dev
@@ -115,11 +121,19 @@ Make sure you have the following installed on your machine:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## More Screenshots
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+- Job Results Page
+  <img src="https://github.com/user-attachments/assets/22acddc2-757b-4e9c-b6ea-94c9f151d798" alt="Job Results Page" />
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+- Individual Job Page with links to apply through Reed.uk or directly with Company
+  <img src="https://github.com/user-attachments/assets/e656667f-e93a-4b4f-9ee5-2894a93e3e42" alt="Individual Job Page" />
+  
+- Login Page
+  <img src="https://github.com/user-attachments/assets/80a7c1f3-caef-4faf-bc4e-19014f7ba200" alt="Login Page"/>
+
+- Saved Jobs Page allowing users to save and delete jobs
+<img src="https://github.com/user-attachments/assets/f851314c-da90-4bae-936c-5008a5f6d64e" alt="Saved Jobs Page" />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,13 +144,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 Trenton Fisher
 trenton0fisher@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/Trenton1Fisher/job-search)
+Project Link: [View Live Site](https://job.trentonfisher.xyz)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
