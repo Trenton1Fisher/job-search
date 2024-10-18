@@ -5,7 +5,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/0f2cd737-de1f-44cc-809a-bc2a90bccb0d" alt="Logo" width="80" height="80">
+
   </a>
 
 <h3 align="center">UK Jobble</h3>
@@ -33,24 +34,22 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#usage">More ScreenShots</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This is a job search application that allows users to explore over 130,000 job opportunities across the UK by leveraging the Reed.co.uk API. With this app, users can easily search for jobs based on location, job title, or other filters to match their career goals.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Key features include:
+  - Job Search: Browse and filter through a vast collection of job listings pulled from Reed.co.uk.
+  - User Authentication: Sign up or log in to your account to save jobs you are interested in.
+  - Save and Track Jobs: Keep track of your favorite jobs by saving them to your profile for later review.
+  - Apply for Jobs: Once you've found the perfect job, you can choose to apply directly through Reed.co.uk or through the hosting company's website.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,34 +65,28 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This section explains how to get started with running the project locally. Follow these steps in order to set up and run the job search app on your local machine.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-First Get keys from vercel PostgeSQL database and Reed.uk api keys
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Make sure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/) (version 14.x or higher)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
 
 ### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/Trenton1Fisher/job-search
-   ```
-3. Install NPM packages
+1. **Clone the repository**  
+   Open your terminal and run the following command to clone the repository:
+   ```bash
+   git clone https://github.com/your-username/job-search-app.git
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API keys in a `.env.local` file
+3. Enter your API keys in a `.env.local` file
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
-5. Change git remote url to avoid accidental pushes to base project
+4. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
