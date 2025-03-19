@@ -5,7 +5,6 @@ import type { HighlightedJob } from '../../types/apiFetchingTypes'
 import DOMPurify from 'isomorphic-dompurify'
 import { Claims } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 
 interface HighlightedJobProps {
   highlightedJob: HighlightedJob
@@ -26,9 +25,10 @@ export default function HiglightedJobComponent({
   )
 
   async function handleJobSave() {
+    if (!user) return
     setLoading(true)
-    //Vercel db only updates on get requests at the time of creating, current error that needs resolved on their end
-    if (user) {
+
+    try {
       const res = await fetch(
         `/api/save?user=${user.sub}&job=${highlightedJob.jobId}`,
         {
@@ -42,41 +42,40 @@ export default function HiglightedJobComponent({
         setIsSaved(true)
         setLoading(false)
       }
+    } catch (error) {
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   async function handleJobDelete() {
+    if (!user) return
     setLoading(true)
-    if (user) {
-      try {
-        const res = await fetch(
-          `/api/delete?user=${user.sub}&job=${highlightedJob.jobId}`,
-          {
-            //Vercel db only updates on get requests at the time of creating, current error that needs resolved on their end
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json;',
-            },
-          }
-        )
-        if (res.ok) {
-          setLoading(false)
-          setIsSaved(false)
-          router.refresh()
+
+    try {
+      const res = await fetch(
+        `/api/delete?user=${user.sub}&job=${highlightedJob.jobId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json;',
+          },
         }
-      } catch (error) {
-        console.log(error)
+      )
+      if (res.ok) {
         setLoading(false)
-        return
+        setIsSaved(false)
       }
+    } catch (error) {
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   return (
     <>
       <div className="relative w-full hidden md:block md:mt-[-40px]">
+        {/* Nextjs image effects the image size and aspect ration to not be what i want */}
         <img
           src="/bradcam.png"
           alt="job title banner"
@@ -106,6 +105,7 @@ export default function HiglightedJobComponent({
                           isSaved ? 'text-green-500' : 'text-gray-500'
                         }`}
                         onClick={isSaved ? handleJobDelete : handleJobSave}
+                        disabled={loading}
                       >
                         <svg
                           className="w-6 h-6"

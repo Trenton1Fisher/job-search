@@ -10,9 +10,9 @@ export async function getIsJobSaved(user: string, jobId: number) {
   try {
     const { rows } =
       await sql`SELECT * FROM job_accounts WHERE Account_Id = ${user} AND Job_id = ${jobId};`
-    return rows.length > 0 // Return true if any rows are found, indicating that the job is saved
+    return rows.length > 0
   } catch (error) {
     console.error('Error querying database:', error)
-    return false // Return false if an error occurs during the database query
+    return false
   }
 }
