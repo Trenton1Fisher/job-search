@@ -3,7 +3,7 @@
 import { sql } from '@vercel/postgres'
 
 export async function getIsJobSaved(user: string, jobId: number) {
-  if (!user || !jobId) {
+  if (!user || jobId <= 0) {
     return false
   }
 
