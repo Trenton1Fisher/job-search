@@ -1,5 +1,7 @@
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Input from '@/components/ui/input'
+import userEvent from '@testing-library/user-event'
+import Input from '@/components/ui/Input'
 import { useFormStatus } from 'react-dom'
 
 jest.mock('react-dom', () => ({
@@ -8,7 +10,7 @@ jest.mock('react-dom', () => ({
 }))
 
 describe('Input Component', () => {
-  const renderInput = (pending: boolean) => {
+  const renderInput = (pending: boolean, setSearchInput: jest.Mock) => {
     const mockUseFormStatus = useFormStatus as jest.Mock
     mockUseFormStatus.mockReturnValue({ pending })
 
@@ -18,13 +20,14 @@ describe('Input Component', () => {
         name="keywords"
         placeholder="Enter job title or keywords"
         searchInput={''}
-        setSearchInput={jest.fn()}
+        setSearchInput={setSearchInput} // Pass the mock function here
       />
     )
   }
 
   it('renders the input component', () => {
-    renderInput(false)
+    const setSearchInput = jest.fn() // Mock the setSearchInput function
+    renderInput(false, setSearchInput)
     const inputElement = screen.getByPlaceholderText(
       'Enter job title or keywords'
     )
@@ -32,11 +35,17 @@ describe('Input Component', () => {
     expect(inputElement).not.toBeDisabled()
   })
 
-  it('expects input component to be disabled', () => {
-    renderInput(true)
+  it('expects onChange function to be called', async () => {
+    const setSearchInput = jest.fn()
+    renderInput(false, setSearchInput)
     const inputElement = screen.getByPlaceholderText(
       'Enter job title or keywords'
-    )
-    expect(inputElement).toBeDisabled()
+    ) as HTMLInputElement
+
+    const user = userEvent.setup()
+    await user.type(inputElement, 'software engineer')
+
+    expect(setSearchInput).toHaveBeenCalledTimes(17)
+    expect(setSearchInput).toHaveBeenCalledWith(expect.any(Function))
   })
 })
