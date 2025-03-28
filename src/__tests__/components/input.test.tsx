@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Input from '@/components/ui/Input'
+import Input from '@/components/ui/input'
 import { useFormStatus } from 'react-dom'
 
 jest.mock('react-dom', () => ({
@@ -20,13 +20,13 @@ describe('Input Component', () => {
         name="keywords"
         placeholder="Enter job title or keywords"
         searchInput={''}
-        setSearchInput={setSearchInput} // Pass the mock function here
+        setSearchInput={setSearchInput}
       />
     )
   }
 
   it('renders the input component', () => {
-    const setSearchInput = jest.fn() // Mock the setSearchInput function
+    const setSearchInput = jest.fn()
     renderInput(false, setSearchInput)
     const inputElement = screen.getByPlaceholderText(
       'Enter job title or keywords'
