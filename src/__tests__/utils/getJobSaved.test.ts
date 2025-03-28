@@ -1,5 +1,5 @@
 import { getIsJobSaved } from '@/utils/getJobSaved'
-import { describe, jest, expect, test, beforeAll } from '@jest/globals'
+import { describe, expect, test } from '@jest/globals'
 import { createPool, sql } from '@vercel/postgres'
 import { beforeEach } from 'node:test'
 

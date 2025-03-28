@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Select from '../ui/Select'
-import Input from '../ui/Input'
+import Input from '../ui/input'
 import Button from '../ui/button'
 import {
   milesOptions,
