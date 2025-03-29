@@ -23,7 +23,6 @@ export default function SearchPageSearch() {
 
   function handleFormSubmission() {
     let url = '/search?'
-
     Object.entries(searchInput).forEach(([key, value]) => {
       if (key !== undefined && value !== '' && value !== 0) {
         url += `${key}=${encodeURIComponent(String(value))}&`
