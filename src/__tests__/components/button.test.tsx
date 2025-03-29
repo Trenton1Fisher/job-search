@@ -1,5 +1,6 @@
 import Button from '@/components/ui/button'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { useFormStatus } from 'react-dom'
 
 jest.mock('react-dom', () => ({
