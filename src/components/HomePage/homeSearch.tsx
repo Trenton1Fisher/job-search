@@ -16,7 +16,6 @@ export default function HomeSearch() {
   function handleFormSubmission(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     let url = '/search?'
-    console.log('called')
 
     Object.entries(searchInput).forEach(([key, value]) => {
       if (key !== undefined && value !== '' && value !== 0) {
